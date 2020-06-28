@@ -21,13 +21,12 @@ export default class CanvasImage extends Component {
   updateCanvas() {
     const { canvas } = this;
     const context = canvas.getContext('2d');
-    console.log('context', context);
-    console.log('props', this.props);
     this.props.updateCanvas(context);
   }
 
   render() {
-    return <canvas
+    return (
+      <canvas
       ref={(e) => { this.canvas = e; }}
       width={this.props.width}
       height={this.props.height}
@@ -36,8 +35,10 @@ export default class CanvasImage extends Component {
         borderRadius:　this.props.borderRadius,
         borderColor: this.props.borderColor,
         borderWidth: this.props.borderWidth,
-        borderStyle: 'solid'
-      }} />;
+        borderStyle: 'solid',
+        maxWidth: '100%'
+      }} />
+    )
   }
 }
 

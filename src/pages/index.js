@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 
 export default class Index extends Component {
   constructor(props) {
@@ -39,7 +39,6 @@ export default class Index extends Component {
     const target = event.target
     const value = target.value
     const name = target.name
-    console.log(value);
     this.setState({
       [name]: value,
     })
@@ -160,8 +159,8 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
           </Form>
-          <Button onClick={this.resetState}>初期化</Button>
           <CanvasImage {...canvasProps} />
+          <Button onClick={this.resetState}>初期化</Button>
           <div>
             <Link to="/page-2/">Go to page 2</Link> <br />
             <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
