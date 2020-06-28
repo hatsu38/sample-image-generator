@@ -1,27 +1,43 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import AutoImage from "./autoImage"
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
+      background: `white`,
+      marginBottom: `1rem`,
+      textAlign: `center`,
+      borderBottom: `1px solid #C7D3D9`,
     }}
   >
     <div
       style={{
-        margin: `0 auto`,
+        margin: `0 18px`,
         maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+        height: `64px`,
+        display: `flex`,
+        alignItems: `center`,
+        animation: `slideUpIn 1s ease-out`
       }}
     >
+      <div style={{
+        width: '30px'
+      }}>
+        <AutoImage filename={'no_image.png'} />
+      </div>
       <h1 style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
-            color: `white`,
+            color: `#18283E`,
             textDecoration: `none`,
+            fontSize: `18px`,
+            display: `flex`,
+            marginLeft: `12px`,
+            paddingLeft: `12px`,
+            borderLeft: `1px solid #C7D3D9`
           }}
         >
           {siteTitle}
