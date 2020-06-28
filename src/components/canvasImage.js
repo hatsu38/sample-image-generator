@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class CanvasImage extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   componentDidMount() {
     this.updateCanvas();
   }
@@ -27,17 +24,15 @@ export default class CanvasImage extends Component {
   render() {
     return (
       <canvas
-      ref={(e) => { this.canvas = e; }}
-      width={this.props.width}
-      height={this.props.height}
-      style={{
-        backgroundColor: this.props.backgroundColor,
-        borderRadius:　this.props.borderRadius,
-        borderColor: this.props.borderColor,
-        borderWidth: this.props.borderWidth,
-        borderStyle: 'solid',
-        maxWidth: '100%'
-      }} />
+        id="canvas"
+        ref={(e) => { this.canvas = e; }}
+        width={this.props.width}
+        height={this.props.height}
+        style={{
+          maxWidth: '100%',
+          border: '1px solid #ccc'
+        }}
+      />
     )
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Link } from "gatsby"
 
 import 'semantic-ui-css/semantic.min.css'
@@ -7,32 +7,43 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
-import { Button, Form } from 'semantic-ui-react'
+import {Button, Form } from 'semantic-ui-react'
 
 export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState;
     this.resetState = this.resetState.bind(this)
+    this.downloadImage = this.downloadImage.bind(this)
   };
 
   get initialState() {
     return {
-      text: 'Sample',
-      color: '#18283e',
-      backgroundColor: '#ff00ff',
+      text: '',
+      color: '#ffffff',
+      backgroundColor: '#cccccc',
+      xPosition: 0,
+      yPosition: 0,
       width: 800,
       height: 400,
       fontSize: 60,
       textAlign: 'center',
-      borderRadius: 18,
-      borderColor: '#00ff00',
-      borderWidth: 5
+      borderColor: '#cccccc',
+      borderWidth: 0,
+      fileType: 'png'
     };
   }
 
   resetState() {
     this.setState(this.initialState);
+  }
+
+  downloadImage() {
+    const canvas = document.getElementById('canvas');
+    const downloadLink = document.getElementById('downloadLink');
+    downloadLink.href = canvas.toDataURL(`image/${this.state.fileType}`);
+    downloadLink.download = `download.${this.state.fileType}`;
+    downloadLink.click();
   }
 
   handleInputChange = event => {
@@ -44,21 +55,47 @@ export default class Index extends Component {
     })
   }
 
+  createStroke(context) {
+    context.strokeStyle = this.state.borderColor;
+    context.lineWidth = this.state.borderWidth;
+    context.strokeRect(this.state.xPosition, this.state.yPosition, this.state.width, this.state.height);
+  }
+
+  createRect(context) {
+    // 背景を作る
+    context.fillStyle = this.state.backgroundColor;
+    context.fillRect(this.state.xPosition, this.state.yPosition, this.state.width, this.state.height);
+  }
+
+  createFillText(context, canvasText) {
+    context.font = this.state.fontSize + "px 'ＭＳ ゴシック'";
+    context.textAlign = "center";
+    context.textBaseline = 'middle';
+    context.fillStyle = this.state.color;
+    context.fillText(canvasText, this.state.width/2, this.state.height/2);
+  }
+
   render() {
     const canvasProps = {
       width: this.state.width,
       height: this.state.height,
       backgroundColor: this.state.backgroundColor,
-      borderRadius: `${this.state.borderRadius}px`,
       borderColor: this.state.borderColor,
       borderWidth: `${this.state.borderWidth}px`,
       updateCanvas: (context) => {
-        context.clearRect(0, 0, this.state.width, this.state.height);
-        context.font = this.state.fontSize + "px 'ＭＳ ゴシック'";
-        context.textAlign = "center";
-        context.textBaseline = 'middle';
-        context.fillStyle = this.state.color;
-        context.fillText(this.state.text, this.state.width/2, this.state.height/2);
+        context.clearRect(this.state.xPosition, this.state.yPosition, this.state.width, this.state.height);
+        this.createRect(context);
+
+        // 枠線を作る
+        if(this.state.borderWidth > 0){
+          this.createStroke(context);
+        }
+
+        // 文字を作る
+        let canvasText = this.state.text || `${this.state.width} × ${this.state.height}`
+        if(canvasText) {
+          this.createFillText(context, canvasText);
+        }
       },
     };
     return (
@@ -139,16 +176,6 @@ export default class Index extends Component {
                 />
               </Form.Field>
               <Form.Field>
-              <label>borderRadius</label>
-                <input
-                  type="number"
-                  name="borderRadius"
-                  min="0"
-                  value={this.state.borderRadius}
-                  onChange={this.handleInputChange}
-                />
-              </Form.Field>
-              <Form.Field>
                 <label>borderColor</label>
                 <input
                   type="color"
@@ -159,8 +186,14 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
           </Form>
-          <CanvasImage {...canvasProps} />
-          <Button onClick={this.resetState}>初期化</Button>
+          <div className="textCenter">
+            <CanvasImage {...canvasProps} ref={this.canvas} />
+          </div>
+          <div className="textCenter">
+            <Button onClick={this.resetState}>初期化</Button>
+            <Button color='blue' onClick={this.downloadImage}>保存</Button>
+          </div>
+          <a id="downloadLink" to='#' style={{display: 'none'}} />
           <div>
             <Link to="/page-2/">Go to page 2</Link> <br />
             <Link to="/using-typescript/">Go to "Using TypeScript"</Link>

@@ -620,3 +620,10 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+.textCenter{
+  text-align: center;
+}
+.columnAlignCenter{
+  align-items: center !important;
+}
