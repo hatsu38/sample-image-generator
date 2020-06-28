@@ -9,7 +9,12 @@ import CanvasImage from "../components/canvasImage"
 export default class Index extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = this.initialState;
+    this.resetState = this.resetState.bind(this)
+  };
+
+  get initialState() {
+    return {
       text: 'Sample',
       color: '#18283e',
       backgroundColor: '#ff00ff',
@@ -21,6 +26,10 @@ export default class Index extends Component {
       borderColor: '#00ff00',
       borderWidth: 5
     };
+  }
+
+  resetState() {
+    this.setState(this.initialState);
   }
 
   handleInputChange = event => {
@@ -69,6 +78,7 @@ export default class Index extends Component {
               <input
                 type="number"
                 name="fontSize"
+                min="0"
                 value={this.state.fontSize}
                 onChange={this.handleInputChange}
               />
@@ -96,6 +106,7 @@ export default class Index extends Component {
               <input
                 type="number"
                 name="width"
+                min="0"
                 value={this.state.width}
                 onChange={this.handleInputChange}
               />
@@ -105,6 +116,7 @@ export default class Index extends Component {
               <input
                 type="number"
                 name="height"
+                min="0"
                 value={this.state.height}
                 onChange={this.handleInputChange}
               />
@@ -114,6 +126,7 @@ export default class Index extends Component {
               <input
                 type="number"
                 name="borderRadius"
+                min="0"
                 value={this.state.borderRadius}
                 onChange={this.handleInputChange}
               />
@@ -132,11 +145,13 @@ export default class Index extends Component {
               <input
                 type="number"
                 name="borderWidth"
+                min="0"
                 value={this.state.borderWidth}
                 onChange={this.handleInputChange}
               />
             </label>
           </form>
+          <button onClick={this.resetState}>初期化</button>
           <CanvasImage {...canvasProps} />
           <div>
             <Link to="/page-2/">Go to page 2</Link> <br />
