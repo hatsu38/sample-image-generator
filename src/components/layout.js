@@ -27,10 +27,15 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
+        <footer
+          className="textCenter"
+          style={{
+            margin: `1rem auto 0.5rem`,
+          }}
+        >
+          © {new Date().getFullYear()},
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <span>Sample Image Generator</span>
         </footer>
       </div>
     </>

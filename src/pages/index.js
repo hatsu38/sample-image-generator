@@ -101,7 +101,7 @@ export default class Index extends Component {
     return (
       <>
         <Layout>
-          <SEO title="Home" />
+          <SEO title="Top" />
           <Form>
             <Form.Group widths='equal'>
               <Form.Field>
@@ -194,10 +194,6 @@ export default class Index extends Component {
             <Button color='blue' onClick={this.downloadImage}>保存</Button>
           </div>
           <a id="downloadLink" to='#' style={{display: 'none'}} />
-          <div>
-            <Link to="/page-2/">Go to page 2</Link> <br />
-            <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-          </div>
         </Layout>
       </>
     )
