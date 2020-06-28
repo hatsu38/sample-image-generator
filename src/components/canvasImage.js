@@ -27,7 +27,17 @@ export default class CanvasImage extends Component {
   }
 
   render() {
-    return <canvas ref={(e) => { this.canvas = e; }} width={this.props.width} height={this.props.height} style={{backgroundColor: this.props.backgroundColor}}></canvas>;
+    return <canvas
+      ref={(e) => { this.canvas = e; }}
+      width={this.props.width}
+      height={this.props.height}
+      style={{
+        backgroundColor: this.props.backgroundColor,
+        borderRadius:　this.props.borderRadius,
+        borderColor: this.props.borderColor,
+        borderWidth: this.props.borderWidth,
+        borderStyle: 'solid'
+      }} />;
   }
 }
 
