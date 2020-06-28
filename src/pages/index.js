@@ -102,6 +102,13 @@ export default class Index extends Component {
       <>
         <Layout>
           <SEO title="Top" />
+          <div className="textCenter">
+            <CanvasImage {...canvasProps} ref={this.canvas} />
+          </div>
+          <div className="textCenter">
+            <Button onClick={this.resetState}>初期化</Button>
+            <Button color='blue' onClick={this.downloadImage}>保存</Button>
+          </div>
           <Form>
             <Form.Group widths='equal'>
               <Form.Field>
@@ -186,13 +193,6 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
           </Form>
-          <div className="textCenter">
-            <CanvasImage {...canvasProps} ref={this.canvas} />
-          </div>
-          <div className="textCenter">
-            <Button onClick={this.resetState}>初期化</Button>
-            <Button color='blue' onClick={this.downloadImage}>保存</Button>
-          </div>
           <a id="downloadLink" to='#' style={{display: 'none'}} />
         </Layout>
       </>
