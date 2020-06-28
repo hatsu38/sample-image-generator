@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
-import {Grid, Button, Form } from 'semantic-ui-react'
+import {Button, Form } from 'semantic-ui-react'
 
 export default class Index extends Component {
   constructor(props) {
@@ -186,90 +186,6 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
           </Form>
-          {/* <Form>
-            <label>Text</label>
-            <input
-              type="text"
-              name="text"
-              value={this.state.text}
-              onChange={this.handleInputChange}
-            />
-            <Grid>
-              <Grid.Row columns={2} divided='vertically' className='columnAlignCenter'>
-                <Grid.Column>
-                  <label>fontSize</label>
-                  <input
-                    type="number"
-                    name="fontSize"
-                    min="0"
-                    value={this.state.fontSize}
-                    onChange={this.handleInputChange}
-                  />
-                </Grid.Column>
-                <Grid.Column>
-                  <label>fontColor</label>
-                  <input
-                    type="color"
-                    name="color"
-                    value={this.state.color}
-                    onChange={this.handleInputChange}
-                  />
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row columns={3} divided='vertically'>
-                <Grid.Column>
-                  <label>Width</label>
-                  <input
-                    type="number"
-                    name="width"
-                    min="0"
-                    value={this.state.width}
-                    onChange={this.handleInputChange}
-                  />
-                </Grid.Column>
-                <Grid.Column>
-                <label>Height</label>
-                  <input
-                    type="number"
-                    name="height"
-                    min="0"
-                    value={this.state.height}
-                    onChange={this.handleInputChange}
-                  />
-                </Grid.Column>
-                <Grid.Column>
-                  <label>backgroundColor</label>
-                  <input
-                    type="color"
-                    name="backgroundColor"
-                    value={this.state.backgroundColor}
-                    onChange={this.handleInputChange}
-                  />
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row columns={2} divided='vertically' className='columnAlignCenter'>
-                <Grid.Column>
-                  <label>borderWidth</label>
-                  <input
-                    type="number"
-                    name="borderWidth"
-                    min="0"
-                    value={this.state.borderWidth}
-                    onChange={this.handleInputChange}
-                  />
-                </Grid.Column>
-                <Grid.Column>
-                  <label>borderColor</label>
-                  <input
-                    type="color"
-                    name="borderColor"
-                    value={this.state.borderColor}
-                    onChange={this.handleInputChange}
-                  />
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Form> */}
           <div className="textCenter">
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
