@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from "gatsby"
 
+import 'semantic-ui-css/semantic.min.css'
+
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
+import { Button, Form } from 'semantic-ui-react'
 
 export default class Index extends Component {
   constructor(props) {
@@ -36,7 +39,6 @@ export default class Index extends Component {
     const target = event.target
     const value = target.value
     const name = target.name
-    console.log(value);
     this.setState({
       [name]: value,
     })
@@ -63,96 +65,102 @@ export default class Index extends Component {
       <>
         <Layout>
           <SEO title="Home" />
-          <form>
-            <label>
-              Text：
-              <input
-                type="text"
-                name="text"
-                value={this.state.text}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              fontSize：
-              <input
-                type="number"
-                name="fontSize"
-                min="0"
-                value={this.state.fontSize}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              fontColor：
-              <input
-                type="color"
-                name="color"
-                value={this.state.color}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              backgroundColor：
-              <input
-                type="color"
-                name="backgroundColor"
-                value={this.state.backgroundColor}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Width：
-              <input
-                type="number"
-                name="width"
-                min="0"
-                value={this.state.width}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              Height
-              <input
-                type="number"
-                name="height"
-                min="0"
-                value={this.state.height}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              borderRadius
-              <input
-                type="number"
-                name="borderRadius"
-                min="0"
-                value={this.state.borderRadius}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              borderColor
-              <input
-                type="color"
-                name="borderColor"
-                value={this.state.borderColor}
-                onChange={this.handleInputChange}
-              />
-            </label>
-            <label>
-              borderWidth
-              <input
-                type="number"
-                name="borderWidth"
-                min="0"
-                value={this.state.borderWidth}
-                onChange={this.handleInputChange}
-              />
-            </label>
-          </form>
-          <button onClick={this.resetState}>初期化</button>
+          <Form>
+            <Form.Group widths='equal'>
+              <Form.Field>
+                <label>Text</label>
+                <input
+                  type="text"
+                  name="text"
+                  value={this.state.text}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>fontSize</label>
+                <input
+                  type="number"
+                  name="fontSize"
+                  min="0"
+                  value={this.state.fontSize}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>fontColor</label>
+                <input
+                  type="color"
+                  name="color"
+                  value={this.state.color}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field>
+                <label>Width</label>
+                <input
+                  type="number"
+                  name="width"
+                  min="0"
+                  value={this.state.width}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+              <Form.Field>
+              <label>Height</label>
+                <input
+                  type="number"
+                  name="height"
+                  min="0"
+                  value={this.state.height}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>backgroundColor</label>
+                <input
+                  type="color"
+                  name="backgroundColor"
+                  value={this.state.backgroundColor}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field>
+                <label>borderWidth</label>
+                <input
+                  type="number"
+                  name="borderWidth"
+                  min="0"
+                  value={this.state.borderWidth}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+              <Form.Field>
+              <label>borderRadius</label>
+                <input
+                  type="number"
+                  name="borderRadius"
+                  min="0"
+                  value={this.state.borderRadius}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>borderColor</label>
+                <input
+                  type="color"
+                  name="borderColor"
+                  value={this.state.borderColor}
+                  onChange={this.handleInputChange}
+                />
+              </Form.Field>
+            </Form.Group>
+          </Form>
           <CanvasImage {...canvasProps} />
+          <Button onClick={this.resetState}>初期化</Button>
           <div>
             <Link to="/page-2/">Go to page 2</Link> <br />
             <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
