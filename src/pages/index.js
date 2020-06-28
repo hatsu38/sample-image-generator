@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from "gatsby"
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -7,7 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
-import {Button, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 
 export default class Index extends Component {
   constructor(props) {
@@ -28,7 +27,7 @@ export default class Index extends Component {
       height: 400,
       fontSize: 60,
       textAlign: 'center',
-      borderColor: '#cccccc',
+      borderColor: '#000000',
       borderWidth: 0,
       fileType: 'png'
     };
@@ -124,6 +123,7 @@ export default class Index extends Component {
                 <label>fontSize</label>
                 <input
                   type="number"
+                  pattern="\d*"
                   name="fontSize"
                   min="0"
                   value={this.state.fontSize}
@@ -145,6 +145,7 @@ export default class Index extends Component {
                 <label>Width</label>
                 <input
                   type="number"
+                  pattern="\d*"
                   name="width"
                   min="0"
                   value={this.state.width}
@@ -155,6 +156,7 @@ export default class Index extends Component {
               <label>Height</label>
                 <input
                   type="number"
+                  pattern="\d*"
                   name="height"
                   min="0"
                   value={this.state.height}
@@ -176,6 +178,7 @@ export default class Index extends Component {
                 <label>borderWidth</label>
                 <input
                   type="number"
+                  pattern="\d*"
                   name="borderWidth"
                   min="0"
                   value={this.state.borderWidth}
