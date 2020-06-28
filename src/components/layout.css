@@ -624,3 +624,6 @@ pre tt:after {
 .textCenter{
   text-align: center;
 }
+.columnAlignCenter{
+  align-items: center !important;
+}
