@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { isMobile } from "react-device-detect";
 
 export default class CanvasImage extends Component {
   componentDidMount() {
@@ -21,7 +23,7 @@ export default class CanvasImage extends Component {
     this.props.updateCanvas(context);
   }
 
-  render() {
+  renderCanvas = () => {
     return (
       <canvas
         id="canvas"
@@ -30,16 +32,30 @@ export default class CanvasImage extends Component {
         height={this.props.height}
         style={{
           maxWidth: '100%',
+          maxHeight: '100%',
           border: '1px solid #ccc'
         }}
       />
     )
   }
+
+  renderCanvasByDevise = () => {
+    if(!isMobile) { return this.renderCanvas() }
+
+    return (
+      <div style={{width: '289px', height: '149.5px', margin: '0 auto'}}>
+        { this.renderCanvas() }
+      </div>
+    )
+  };
+
+  render() {
+    return this.renderCanvasByDevise();
+  }
 }
 
-// CanvasImage.propTypes = {
-//   width: PropTypes.number.isRequired,
-//   height: PropTypes.number.isRequired,
-//   backGroundColor: PropTypes.string.isRequired,
-//   updateCanvas: PropTypes.func.isRequired,
-// };
+CanvasImage.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  updateCanvas: PropTypes.func.isRequired,
+};
