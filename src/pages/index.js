@@ -139,20 +139,13 @@ export default class Index extends Component {
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
           <div className="textCenter" style={{marginBottom: '1rem'}}>
-            <Button size='tiny' onClick={this.resetState}>初期化</Button>
+            <Button onClick={this.resetState}>初期化</Button>
             {isMobile ?
               <Message info>
                 <p>画像を長押しすると<br />画像の保存ができます。</p>
               </Message> :
-              <Button size='tiny' color='blue' onClick={this.downloadImage}>保存</Button>
+              <Button color='blue' onClick={this.downloadImage}>保存</Button>
             }
-            <Checkbox
-              toggle
-              label='正方形にする'
-              name="isSquare"
-              checked={this.state.isSquare}
-              onChange={this.handleChangeSquare}
-            />
           </div>
           {this.state.hasDownloadError &&
             <Message negative>
@@ -160,6 +153,15 @@ export default class Index extends Component {
             </Message>
           }
           <Form>
+            <Form.Field className="textCenter">
+              <label>正方形にする</label>
+              <Checkbox
+                toggle
+                name="isSquare"
+                checked={this.state.isSquare}
+                onChange={this.handleChangeSquare}
+              />
+            </Form.Field>
             <Form.Group widths='equal'>
               <Form.Field>
                 <Form.Input
