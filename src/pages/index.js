@@ -58,6 +58,10 @@ export default class Index extends Component {
     this.setState({ [name]: value })
   }
 
+  handleSelectChange = (e, { name, value }) => {
+    this.setState({ [name]: value })
+  }
+
   createStroke(context) {
     context.strokeStyle = this.state.borderColor;
     context.lineWidth = this.state.borderWidth;
@@ -99,10 +103,17 @@ export default class Index extends Component {
         }
       },
     };
+    const selectableFileType = [
+      {key: 'png' ,value: 'png', text: '.png'},
+      {key: 'jpeg', value: 'jpeg', text: 'jpeg'}
+    ];
     return (
       <>
         <Layout>
-          <SEO title="Top" />
+          <SEO
+            title="サンプル画像を簡単に作れる"
+            description="アプリいらずで、サンプル画像を簡単に作れるサイトです。"
+          />
           <div className="textCenter">
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
@@ -200,9 +211,15 @@ export default class Index extends Component {
                   onChange={this.handleInputChange}
                 />
               </Form.Field>
-              <Form.Field label='拡張子' control='select' name="fileType" onChange={this.handleInputChange}>
-                <option value='png'>.png</option>
-                <option value='jpeg'>.jpeg</option>
+              <Form.Field>
+                <Form.Select
+                  name="fileType"
+                  label='拡張子'
+                  selection
+                  defaultValue={this.state.fileType}
+                  onChange={this.handleSelectChange}
+                  options={selectableFileType}
+                />
               </Form.Field>
             </Form.Group>
           </Form>
