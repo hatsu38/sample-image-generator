@@ -176,8 +176,8 @@ export default class Index extends Component {
             <Form.Group widths='equal'>
               <Form.Input
                 label={`枠線の幅: ${this.state.borderWidth}px `}
-                min={1}
-                max={4999}
+                min={0}
+                max={299}
                 name='borderWidth'
                 onChange={this.handleInputChange}
                 type='range'
