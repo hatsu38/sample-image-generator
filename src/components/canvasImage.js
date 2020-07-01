@@ -2,25 +2,44 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isMobile } from "react-device-detect";
 
+import AutoImage from "../components/autoImage"
+
 export default class CanvasImage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageFileName: null
+    }
+  }
   componentDidMount() {
-    this.updateCanvas();
+    this.updateCanvasAndConvertToImage();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
-      this.updateCanvas();
+  componentDidUpdate(prevProps) {
+    this.updateCanvas();
+    if (this.props !== prevProps) {
+      this.convertFromCanvasToImage();
     }
   }
 
-  componentDidUpdate() {
+  updateCanvasAndConvertToImage() {
     this.updateCanvas();
+    this.convertFromCanvasToImage();
   }
 
   updateCanvas() {
     const { canvas } = this;
+    if(!canvas) { return null; }
+
     const context = canvas.getContext('2d');
     this.props.updateCanvas(context);
+  }
+
+  convertFromCanvasToImage() {
+    const canvas = document.getElementById('canvas');
+    const imageFileName = canvas ? canvas.toDataURL(`image/${this.props.fileType}`) : null
+
+    this.setState({ imageFileName: imageFileName })
   }
 
   renderCanvas = () => {
@@ -33,7 +52,8 @@ export default class CanvasImage extends Component {
         style={{
           maxWidth: '100%',
           maxHeight: '100%',
-          border: '1px solid #ccc'
+          border: '1px solid #ccc',
+          display: 'none'
         }}
       />
     )
@@ -50,7 +70,13 @@ export default class CanvasImage extends Component {
   };
 
   render() {
-    return this.renderCanvasByDevise();
+    const canvas = this.renderCanvas();
+    return (
+      <>
+        {canvas}
+        <img id="canvas-to-image" src={this.state.imageFileName} style={{maxHeight: '100%', maxWidth: '100%'}} />
+      </>
+    );
   }
 }
 

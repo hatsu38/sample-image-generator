@@ -38,9 +38,9 @@ export default class Index extends Component {
   }
 
   downloadImage() {
-    const canvas = document.getElementById('canvas');
     const downloadLink = document.getElementById('downloadLink');
-    downloadLink.href = canvas.toDataURL(`image/${this.state.fileType}`);
+
+    downloadLink.href = document.getElementById('canvas-to-image').src;
     downloadLink.download = `download.${this.state.fileType}`;
     downloadLink.click();
   }
@@ -49,9 +49,7 @@ export default class Index extends Component {
     const target = event.target
     const value = target.value
     const name = target.name
-    this.setState({
-      [name]: value,
-    })
+    this.setState({ [name]: value })
   }
 
   createStroke(context) {
@@ -78,9 +76,7 @@ export default class Index extends Component {
     const canvasProps = {
       width: this.state.width,
       height: this.state.height,
-      backgroundColor: this.state.backgroundColor,
-      borderColor: this.state.borderColor,
-      borderWidth: `${this.state.borderWidth}px`,
+      fileType: this.state.fileType,
       updateCanvas: (context) => {
         context.clearRect(this.state.xPosition, this.state.yPosition, this.state.width, this.state.height);
         this.createRect(context);
@@ -147,7 +143,7 @@ export default class Index extends Component {
                   type="number"
                   pattern="\d*"
                   name="width"
-                  min="0"
+                  min="1"
                   value={this.state.width}
                   onChange={this.handleInputChange}
                 />
@@ -158,7 +154,7 @@ export default class Index extends Component {
                   type="number"
                   pattern="\d*"
                   name="height"
-                  min="0"
+                  min="1"
                   value={this.state.height}
                   onChange={this.handleInputChange}
                 />
@@ -196,7 +192,7 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
           </Form>
-          <a id="downloadLink" to='#' style={{display: 'none'}} />
+          <a id="downloadLink" style={{display: 'none'}} />
         </Layout>
       </>
     )
