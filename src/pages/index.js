@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
-import { Button, Form, Message } from 'semantic-ui-react'
+import { Button, Form, Message, Checkbox } from 'semantic-ui-react'
 
 export default class Index extends Component {
   constructor(props) {
@@ -15,10 +15,12 @@ export default class Index extends Component {
     this.state = this.initialState;
     this.resetState = this.resetState.bind(this)
     this.downloadImage = this.downloadImage.bind(this)
+    this.handleChangeSquare = this.handleChangeSquare.bind(this)
   };
 
   get initialState() {
     return {
+      isSquare: false,
       text: '',
       color: '#ffffff',
       backgroundColor: '#cccccc',
@@ -52,16 +54,36 @@ export default class Index extends Component {
 
   handleInputChange = event => {
     const target = event.target
-    const value = target.value
+    const value = target.value;
     const name = target.name
 
     this.setState({ [name]: value })
+    if(!this.state.isSquare) { return null; }
+
+    if(name === 'width' || name === 'height') {
+      this.widthAndHeightSameDo(name, value)
+    }
   }
 
   handleSelectChange = (e, { name, value }) => {
     this.setState({ [name]: value })
   }
 
+  handleChangeSquare(event) {
+    this.setState((prevState) => ({ isSquare: !prevState.isSquare }))
+
+    if(!this.state.isSquare){
+      this.setState({height: this.state.width})
+    }
+  }
+
+  widthAndHeightSameDo(name, value) {
+    if(name === 'width'){
+      this.setState({height: value})
+    } else if( name === 'height'){
+      this.setState({width: value})
+    }
+  }
   createStroke(context) {
     context.strokeStyle = this.state.borderColor;
     context.lineWidth = this.state.borderWidth;
@@ -112,19 +134,25 @@ export default class Index extends Component {
         <Layout>
           <SEO
             title="サンプル画像を簡単に作れる"
-            description="アプリいらずで、サンプル画像を簡単に作れるサイトです。"
           />
           <div className="textCenter">
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
           <div className="textCenter" style={{marginBottom: '1rem'}}>
-            <Button onClick={this.resetState}>初期化</Button>
+            <Button size='tiny' onClick={this.resetState}>初期化</Button>
             {isMobile ?
               <Message info>
                 <p>画像を長押しすると<br />画像の保存ができます。</p>
               </Message> :
-              <Button color='blue' onClick={this.downloadImage}>保存</Button>
+              <Button size='tiny' color='blue' onClick={this.downloadImage}>保存</Button>
             }
+            <Checkbox
+              toggle
+              label='正方形にする'
+              name="isSquare"
+              checked={this.state.isSquare}
+              onChange={this.handleChangeSquare}
+            />
           </div>
           {this.state.hasDownloadError &&
             <Message negative>
@@ -134,8 +162,8 @@ export default class Index extends Component {
           <Form>
             <Form.Group widths='equal'>
               <Form.Field>
-                <label>テキスト</label>
-                <input
+                <Form.Input
+                  label='テキスト'
                   type="text"
                   name="text"
                   value={this.state.text}
@@ -143,8 +171,8 @@ export default class Index extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <label>文字の大きさ</label>
-                <input
+                <Form.Input
+                  label='文字の大きさ'
                   type="number"
                   pattern="\d*"
                   name="fontSize"

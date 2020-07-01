@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `Sample Image Generator`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `アプリいらずで、サンプル画像を簡単に作れるサイトです。`,
     author: `@hatsu_38`,
+    siteUrl: 'https://sample-image-generator.web.app/'
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -18,7 +19,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
+        name: `Sample Image Generator`,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
