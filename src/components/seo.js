@@ -19,6 +19,7 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            siteUrl
           }
         }
       }
@@ -26,14 +27,13 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-
+  const siteTitle = `${title} | ${site.siteMetadata.title}`
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={siteTitle}
       meta={[
         {
           name: `description`,
@@ -41,7 +41,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:title`,
-          content: title,
+          content: siteTitle,
         },
         {
           property: `og:description`,
@@ -50,6 +50,14 @@ function SEO({ description, lang, meta, title }) {
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+          property: `og:url`,
+          content: site.siteMetadata.siteUrl,
+        },
+        {
+          property: `og:image`,
+          content: 'https://sample-image-generator.web.app/images/ogp.png',
         },
         {
           name: `twitter:card`,
@@ -61,7 +69,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: siteTitle,
         },
         {
           name: `twitter:description`,
@@ -73,7 +81,7 @@ function SEO({ description, lang, meta, title }) {
 }
 
 SEO.defaultProps = {
-  lang: `en`,
+  lang: `ja`,
   meta: [],
   description: ``,
 }
