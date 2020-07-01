@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isMobile } from "react-device-detect";
 
-import AutoImage from "../components/autoImage"
-
 export default class CanvasImage extends Component {
   constructor(props) {
     super(props);
@@ -82,5 +80,6 @@ export default class CanvasImage extends Component {
 CanvasImage.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
+  fileType: PropTypes.string.isRequired,
   updateCanvas: PropTypes.func.isRequired,
 };
