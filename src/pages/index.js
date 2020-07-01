@@ -29,7 +29,8 @@ export default class Index extends Component {
       textAlign: 'center',
       borderColor: '#000000',
       borderWidth: 0,
-      fileType: 'png'
+      fileType: 'png',
+      hasDownloadError: false
     };
   }
 
@@ -40,11 +41,12 @@ export default class Index extends Component {
   downloadImage() {
     const downloadLink = document.getElementById('downloadLink');
     const canvasToImage = document.getElementById('canvas-to-image');
-    if(!downloadLink || !canvasToImage) { return null };
+    if(!downloadLink || !canvasToImage) { return this.setState({hasDownloadError: true }) };
 
     downloadLink.href = canvasToImage.src;
     downloadLink.download = `download.${this.state.fileType}`;
     downloadLink.click();
+    this.setState({hasDownloadError: false })
   }
 
   handleInputChange = event => {
@@ -107,6 +109,9 @@ export default class Index extends Component {
             <Button onClick={this.resetState}>初期化</Button>
             <Button color='blue' onClick={this.downloadImage}>保存</Button>
           </div>
+          {this.state.hasDownloadError &&
+            <p className="textCenter" style={{fontSize: '28px'}}>ダウンロードに失敗しました🙇🏻‍♂️</p>
+          }
           <Form>
             <Form.Group widths='equal'>
               <Form.Field>
