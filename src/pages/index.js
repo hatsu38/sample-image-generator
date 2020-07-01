@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isMobile } from "react-device-detect";
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -6,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Message } from 'semantic-ui-react'
 
 export default class Index extends Component {
   constructor(props) {
@@ -105,12 +106,19 @@ export default class Index extends Component {
           <div className="textCenter">
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
-          <div className="textCenter">
+          <div className="textCenter" style={{marginBottom: '1rem'}}>
             <Button onClick={this.resetState}>初期化</Button>
-            <Button color='blue' onClick={this.downloadImage}>保存</Button>
+            {isMobile ?
+              <Message info>
+                <p>画像を長押しすると<br />画像の保存ができます。</p>
+              </Message> :
+              <Button color='blue' onClick={this.downloadImage}>保存</Button>
+            }
           </div>
           {this.state.hasDownloadError &&
-            <p className="textCenter" style={{fontSize: '28px'}}>ダウンロードに失敗しました🙇🏻‍♂️</p>
+            <Message negative>
+              <Message.Header>ダウンロードに失敗しました🙇🏻‍♂️</Message.Header>
+            </Message>
           }
           <Form>
             <Form.Group widths='equal'>
@@ -191,6 +199,10 @@ export default class Index extends Component {
                   value={this.state.borderColor}
                   onChange={this.handleInputChange}
                 />
+              </Form.Field>
+              <Form.Field label='拡張子' control='select' name="fileType" onChange={this.handleInputChange}>
+                <option value='png'>.png</option>
+                <option value='jpeg'>.jpeg</option>
               </Form.Field>
             </Form.Group>
           </Form>

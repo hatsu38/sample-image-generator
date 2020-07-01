@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isMobile } from "react-device-detect";
-
 export default class CanvasImage extends Component {
   constructor(props) {
     super(props);
