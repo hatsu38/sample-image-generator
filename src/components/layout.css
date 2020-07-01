@@ -627,3 +627,20 @@ pre tt:after {
 .columnAlignCenter{
   align-items: center !important;
 }
+
+.maxWidthHightImage{
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.mobileImageFrame{
+  width: 289px;
+  height: 149.5px;
+  margin: 0.5em auto;
+}
+
+.pcImageFrame{
+  width: 2000px;
+  height: 1000px;
+  margin: 0.5em auto;
+}

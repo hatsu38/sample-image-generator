@@ -115,7 +115,7 @@ export default class Index extends Component {
           <Form>
             <Form.Group widths='equal'>
               <Form.Field>
-                <label>Text</label>
+                <label>テキスト</label>
                 <input
                   type="text"
                   name="text"
@@ -124,7 +124,7 @@ export default class Index extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <label>fontSize</label>
+                <label>文字の大きさ</label>
                 <input
                   type="number"
                   pattern="\d*"
@@ -135,7 +135,7 @@ export default class Index extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <label>fontColor</label>
+                <label>文字の色</label>
                 <input
                   type="color"
                   name="color"
@@ -146,7 +146,7 @@ export default class Index extends Component {
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Input
-                label={`Width: ${this.state.width}ms `}
+                label={`幅: ${this.state.width}px `}
                 min={1}
                 max={4999}
                 name='width'
@@ -155,7 +155,7 @@ export default class Index extends Component {
                 value={this.state.width}
               />
               <Form.Input
-                label={`Height: ${this.state.height}ms `}
+                label={`高さ: ${this.state.height}px `}
                 min={1}
                 max={4999}
                 name='height'
@@ -164,7 +164,7 @@ export default class Index extends Component {
                 value={this.state.height}
               />
               <Form.Field>
-                <label>backgroundColor</label>
+                <label>背景色</label>
                 <input
                   type="color"
                   name="backgroundColor"
@@ -174,19 +174,17 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
+              <Form.Input
+                label={`枠線の幅: ${this.state.borderWidth}px `}
+                min={1}
+                max={4999}
+                name='borderWidth'
+                onChange={this.handleInputChange}
+                type='range'
+                value={this.state.borderWidth}
+              />
               <Form.Field>
-                <label>borderWidth</label>
-                <input
-                  type="number"
-                  pattern="\d*"
-                  name="borderWidth"
-                  min="0"
-                  value={this.state.borderWidth}
-                  onChange={this.handleInputChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>borderColor</label>
+                <label>枠線の色</label>
                 <input
                   type="color"
                   name="borderColor"
