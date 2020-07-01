@@ -15,11 +15,10 @@ export default class CanvasImage extends Component {
     this.updateCanvasAndConvertToImage();
   }
 
-  componentDidUpdate(prevProps) {
-    this.updateCanvas();
-    if (this.props !== prevProps) {
-      this.convertFromCanvasToImage();
-    }
+  componentDidUpdate(nextProps) {
+    if(this.props === nextProps) { return null; }
+
+    this.updateCanvasAndConvertToImage()
   }
 
   updateCanvasAndConvertToImage() {
