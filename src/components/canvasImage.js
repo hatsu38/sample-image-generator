@@ -3,24 +3,40 @@ import PropTypes from 'prop-types';
 import { isMobile } from "react-device-detect";
 
 export default class CanvasImage extends Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
-      this.updateCanvas();
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageFileName: null
     }
   }
+  componentDidMount() {
+    this.updateCanvasAndConvertToImage();
+  }
 
-  componentDidUpdate() {
+  componentDidUpdate(nextProps) {
+    if(this.props === nextProps) { return null; }
+
+    this.updateCanvasAndConvertToImage()
+  }
+
+  updateCanvasAndConvertToImage() {
     this.updateCanvas();
+    this.convertFromCanvasToImage();
   }
 
   updateCanvas() {
     const { canvas } = this;
+    if(!canvas) { return null; }
+
     const context = canvas.getContext('2d');
     this.props.updateCanvas(context);
+  }
+
+  convertFromCanvasToImage() {
+    const canvas = document.getElementById('canvas');
+    const imageFileName = canvas ? canvas.toDataURL(`image/${this.props.fileType}`) : null
+
+    this.setState({ imageFileName: imageFileName })
   }
 
   renderCanvas = () => {
@@ -33,7 +49,8 @@ export default class CanvasImage extends Component {
         style={{
           maxWidth: '100%',
           maxHeight: '100%',
-          border: '1px solid #ccc'
+          border: '1px solid #ccc',
+          display: 'none'
         }}
       />
     )
@@ -50,12 +67,19 @@ export default class CanvasImage extends Component {
   };
 
   render() {
-    return this.renderCanvasByDevise();
+    const canvas = this.renderCanvas();
+    return (
+      <>
+        {canvas}
+        <img id="canvas-to-image" src={this.state.imageFileName} style={{maxHeight: '100%', maxWidth: '100%'}} />
+      </>
+    );
   }
 }
 
 CanvasImage.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
+  fileType: PropTypes.string.isRequired,
   updateCanvas: PropTypes.func.isRequired,
 };

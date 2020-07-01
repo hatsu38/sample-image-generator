@@ -12,7 +12,7 @@ WebSite：https://sample-image-generator.web.app/
 
 ## Use of Technology
 - [React.js](https://ja.reactjs.org/)
-- [Gyatsby JS](https://www.gatsbyjs.org/)
+- [Gatsby JS](https://www.gatsbyjs.org/)
 - [Semantic UI React](https://react.semantic-ui.com/)
 - [Firebase](https://firebase.google.com/)
 
