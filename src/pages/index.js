@@ -29,7 +29,8 @@ export default class Index extends Component {
       textAlign: 'center',
       borderColor: '#000000',
       borderWidth: 0,
-      fileType: 'png'
+      fileType: 'png',
+      hasDownloadError: false
     };
   }
 
@@ -39,16 +40,20 @@ export default class Index extends Component {
 
   downloadImage() {
     const downloadLink = document.getElementById('downloadLink');
+    const canvasToImage = document.getElementById('canvas-to-image');
+    if(!downloadLink || !canvasToImage) { return this.setState({hasDownloadError: true }) };
 
-    downloadLink.href = document.getElementById('canvas-to-image').src;
+    downloadLink.href = canvasToImage.src;
     downloadLink.download = `download.${this.state.fileType}`;
     downloadLink.click();
+    this.setState({hasDownloadError: false })
   }
 
   handleInputChange = event => {
     const target = event.target
     const value = target.value
     const name = target.name
+
     this.setState({ [name]: value })
   }
 
@@ -74,8 +79,8 @@ export default class Index extends Component {
 
   render() {
     const canvasProps = {
-      width: this.state.width,
-      height: this.state.height,
+      width: Number(this.state.width),
+      height: Number(this.state.height),
       fileType: this.state.fileType,
       updateCanvas: (context) => {
         context.clearRect(this.state.xPosition, this.state.yPosition, this.state.width, this.state.height);
@@ -87,7 +92,7 @@ export default class Index extends Component {
         }
 
         // 文字を作る
-        let canvasText = this.state.text || `${this.state.width} × ${this.state.height}`
+        const canvasText = this.state.text || `${this.state.width} × ${this.state.height}`
         if(canvasText) {
           this.createFillText(context, canvasText);
         }
@@ -104,10 +109,13 @@ export default class Index extends Component {
             <Button onClick={this.resetState}>初期化</Button>
             <Button color='blue' onClick={this.downloadImage}>保存</Button>
           </div>
+          {this.state.hasDownloadError &&
+            <p className="textCenter" style={{fontSize: '28px'}}>ダウンロードに失敗しました🙇🏻‍♂️</p>
+          }
           <Form>
             <Form.Group widths='equal'>
               <Form.Field>
-                <label>Text</label>
+                <label>テキスト</label>
                 <input
                   type="text"
                   name="text"
@@ -116,7 +124,7 @@ export default class Index extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <label>fontSize</label>
+                <label>文字の大きさ</label>
                 <input
                   type="number"
                   pattern="\d*"
@@ -127,7 +135,7 @@ export default class Index extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <label>fontColor</label>
+                <label>文字の色</label>
                 <input
                   type="color"
                   name="color"
@@ -137,30 +145,26 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
+              <Form.Input
+                label={`幅: ${this.state.width}px `}
+                min={1}
+                max={4999}
+                name='width'
+                onChange={this.handleInputChange}
+                type='range'
+                value={this.state.width}
+              />
+              <Form.Input
+                label={`高さ: ${this.state.height}px `}
+                min={1}
+                max={4999}
+                name='height'
+                onChange={this.handleInputChange}
+                type='range'
+                value={this.state.height}
+              />
               <Form.Field>
-                <label>Width</label>
-                <input
-                  type="number"
-                  pattern="\d*"
-                  name="width"
-                  min="1"
-                  value={this.state.width}
-                  onChange={this.handleInputChange}
-                />
-              </Form.Field>
-              <Form.Field>
-              <label>Height</label>
-                <input
-                  type="number"
-                  pattern="\d*"
-                  name="height"
-                  min="1"
-                  value={this.state.height}
-                  onChange={this.handleInputChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>backgroundColor</label>
+                <label>背景色</label>
                 <input
                   type="color"
                   name="backgroundColor"
@@ -170,19 +174,17 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
+              <Form.Input
+                label={`枠線の幅: ${this.state.borderWidth}px `}
+                min={1}
+                max={4999}
+                name='borderWidth'
+                onChange={this.handleInputChange}
+                type='range'
+                value={this.state.borderWidth}
+              />
               <Form.Field>
-                <label>borderWidth</label>
-                <input
-                  type="number"
-                  pattern="\d*"
-                  name="borderWidth"
-                  min="0"
-                  value={this.state.borderWidth}
-                  onChange={this.handleInputChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>borderColor</label>
+                <label>枠線の色</label>
                 <input
                   type="color"
                   name="borderColor"

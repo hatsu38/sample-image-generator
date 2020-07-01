@@ -39,39 +39,22 @@ export default class CanvasImage extends Component {
     this.setState({ imageFileName: imageFileName })
   }
 
-  renderCanvas = () => {
-    return (
-      <canvas
-        id="canvas"
-        ref={(e) => { this.canvas = e; }}
-        width={this.props.width}
-        height={this.props.height}
-        style={{
-          maxWidth: '100%',
-          maxHeight: '100%',
-          border: '1px solid #ccc',
-          display: 'none'
-        }}
-      />
-    )
-  }
-
-  renderCanvasByDevise = () => {
-    if(!isMobile) { return this.renderCanvas() }
-
-    return (
-      <div style={{width: '289px', height: '149.5px', margin: '0 auto'}}>
-        { this.renderCanvas() }
-      </div>
-    )
-  };
-
   render() {
-    const canvas = this.renderCanvas();
+    const imageClassName = isMobile ? 'mobileImageFrame' : 'pcImageFrame'
     return (
       <>
-        {canvas}
-        <img id="canvas-to-image" src={this.state.imageFileName} style={{maxHeight: '100%', maxWidth: '100%'}} />
+        <canvas
+          id="canvas"
+          ref={(e) => { this.canvas = e; }}
+          width={this.props.width}
+          height={this.props.height}
+          style={{
+            display: 'none'
+          }}
+        />
+        <div className={'maxWidthHightImage ' + imageClassName}>
+          <img id="canvas-to-image" className='maxWidthHightImage' src={this.state.imageFileName} />
+        </div>
       </>
     );
   }
