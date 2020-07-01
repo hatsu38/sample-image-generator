@@ -643,3 +643,7 @@ pre tt:after {
   max-height: 700px;
   margin: 0.5em auto;
 }
+
+.iconLinkSpace{
+  margin: 0.6rem;
+}
