@@ -34,7 +34,6 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={siteTitle}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
@@ -58,7 +57,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:image`,
-          content: '/public/images/ogp.png',
+          content: 'https://sample-image-generator.web.app/images/ogp.png',
         },
         {
           name: `twitter:card`,
