@@ -13,9 +13,6 @@ export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState;
-    this.resetState = this.resetState.bind(this)
-    this.downloadImage = this.downloadImage.bind(this)
-    this.handleChangeSquare = this.handleChangeSquare.bind(this)
   };
 
   get initialState() {
@@ -37,11 +34,21 @@ export default class Index extends Component {
     };
   }
 
-  resetState() {
+  resetState = () => {
     this.setState(this.initialState);
   }
 
-  downloadImage() {
+  fixSnSize = event => {
+    this.setState({height: 630})
+    this.setState({width: 1200})
+  }
+
+  handleChangeFacebook = event => {
+    this.setState({height: 630})
+    this.setState({width: 1200})
+  }
+
+  downloadImage = () => {
     const downloadLink = document.getElementById('downloadLink');
     const canvasToImage = document.getElementById('canvas-to-image');
     if(!downloadLink || !canvasToImage) { return this.setState({hasDownloadError: true }) };
@@ -69,7 +76,7 @@ export default class Index extends Component {
     this.setState({ [name]: value })
   }
 
-  handleChangeSquare(event) {
+  handleChangeSquare = event => {
     this.setState((prevState) => ({ isSquare: !prevState.isSquare }))
 
     if(!this.state.isSquare){
@@ -138,7 +145,8 @@ export default class Index extends Component {
           <div className="textCenter">
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
-          <div className="textCenter" style={{marginBottom: '1rem'}}>
+          <div className="textCenter margin-bottom-sm">
+            <Button onClick={this.fixSnSize} className={ isMobile && "fixSnsButton margin-bottom-xs"}>SNS(Twitter・Facebook)の画像サイズにする</Button>
             <Button onClick={this.resetState}>初期化</Button>
             {isMobile ?
               <Message info>
@@ -196,8 +204,9 @@ export default class Index extends Component {
             <Form.Group widths='equal'>
               <Form.Input
                 label={`幅: ${this.state.width}px `}
-                min={1}
-                max={4999}
+                min={0}
+                max={5000}
+                step={5}
                 name='width'
                 onChange={this.handleInputChange}
                 type='range'
@@ -205,8 +214,9 @@ export default class Index extends Component {
               />
               <Form.Input
                 label={`高さ: ${this.state.height}px `}
-                min={1}
-                max={4999}
+                min={0}
+                max={5000}
+                step={5}
                 name='height'
                 onChange={this.handleInputChange}
                 type='range'

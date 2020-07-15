@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Sample Image Generator`,
+    title: `さんぷる画像ジェネレーター`,
     description: `アプリいらずで、サンプル画像を簡単に作れるサイトです。`,
     author: `@hatsu_38`,
     siteUrl: 'https://sample-image-generator.web.app/'
@@ -19,7 +19,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Sample Image Generator`,
+        name: `さんぷる画像ジェネレーター`,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,

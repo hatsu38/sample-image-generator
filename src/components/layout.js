@@ -37,7 +37,7 @@ const Layout = ({ children }) => {
         >
           © {new Date().getFullYear()},
           {` `}
-          <span>Sample Image Generator</span>
+          <span>さんぷる画像ジェネレーター</span>
         </footer>
       </div>
     </>

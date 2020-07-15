@@ -647,3 +647,16 @@ pre tt:after {
 .iconLinkSpace{
   margin: 0.6rem;
 }
+
+.margin-bottom-sm{
+  margin-bottom: 1rem !important;
+}
+
+.margin-bottom-xs{
+  margin-bottom: 0.5rem !important;
+}
+
+.fixSnsButton {
+  background-color: #2185d0 !important;
+  color: #fff !important;
+}
