@@ -1,0 +1,38 @@
+.imageWrap{
+  height: 420px;
+  border: 2px dashed #2185d0;
+  border-radius: 2px;
+  margin: 1rem auto;
+}
+
+.mobileImageWrap{
+  width: 100%;
+  border: 2px dashed #2185d0;
+  border-radius: 2px;
+  margin: 1rem auto;
+}
+.columnAlignCenter{
+  align-items: center !important;
+}
+
+.maxWidthHightImage{
+  max-height: 100%;
+  max-width: 98%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mobileImageFrame{
+  max-height: 300px;
+  margin: 0.5em auto;
+}
+
+.pcImageFrame{
+  /* max-width: 800px; */
+  max-height: 400px;
+  margin: 0.5em auto;
+}
+
+.iconLinkSpace{
+  margin: 0.6rem;
+}
