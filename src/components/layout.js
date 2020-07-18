@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import Footer from "./footer"
+import "./reset.css"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -37,9 +38,12 @@ const Layout = ({ children }) => {
         >
           © {new Date().getFullYear()},
           {` `}
-          <span>Sample Image Generator</span>
+          <span>さんぷる画像ジェネレーター</span>
         </footer>
       </div>
+      <script src="/__/firebase/7.16.0/firebase-app.js"></script>
+      <script src="/__/firebase/7.16.0/firebase-analytics.js"></script>
+      <script src="/__/firebase/init.js"></script>
     </>
   )
 }

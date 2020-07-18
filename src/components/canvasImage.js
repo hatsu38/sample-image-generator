@@ -47,12 +47,10 @@ export default class CanvasImage extends Component {
           ref={(e) => { this.canvas = e; }}
           width={this.props.width}
           height={this.props.height}
-          style={{
-            display: 'none'
-          }}
+          style={{display: 'none'}}
         />
-        <div className={'maxWidthHightImage'}>
-          <img id="canvas-to-image" className={imageClassName} src={this.state.imageFileName} />
+        <div className="maxWidthHightImage">
+          <img id="canvas-to-image" className={imageClassName} src={this.state.imageFileName} alt="" />
         </div>
       </>
     );

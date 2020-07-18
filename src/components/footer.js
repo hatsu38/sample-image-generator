@@ -5,8 +5,23 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Icon } from 'semantic-ui-react'
 
 export default class Footer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      copied: false
+    }
+  }
+
+  copyClick = () => {
+    this.setState({copied: true})
+    setTimeout(
+      () => this.setState({copied: false}),
+      3000
+    );
+  }
+
   render() {
-    const shareURL = 'https://sample-image-generator.web.app/'
+    const shareURL = "https://sample-image-generator.web.app/"
     return (
       <>
         <div className='textCenter'>
@@ -27,10 +42,14 @@ export default class Footer extends Component {
             <Icon link name='facebook' size='big' />
           </Link>
           <Link to='/' className='iconLinkSpace'>
-            <CopyToClipboard text={shareURL}>
-              <Icon link name='linkify' size='big' />
+            <CopyToClipboard
+              text={shareURL}
+              onCopy={this.copyClick}
+            >
+              <Icon link name='copy' size='big' />
             </CopyToClipboard>
           </Link>
+          {this.state.copied ? <span style={{color: 'red', fontWeight: 'bold'}}>URLをコピーしました</span> : null}
         </div>
       </>
     )

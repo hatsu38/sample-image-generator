@@ -8,22 +8,20 @@ import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
 import { Button, Form, Message, Checkbox } from 'semantic-ui-react'
+import { TwitterPicker } from 'react-color';
 
 export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState;
-    this.resetState = this.resetState.bind(this)
-    this.downloadImage = this.downloadImage.bind(this)
-    this.handleChangeSquare = this.handleChangeSquare.bind(this)
   };
 
   get initialState() {
     return {
       isSquare: false,
       text: '',
-      color: '#ffffff',
-      backgroundColor: '#cccccc',
+      color: '#FFFFFF',
+      backgroundColor: '#8ED1FC',
       xPosition: 0,
       yPosition: 0,
       width: 800,
@@ -37,11 +35,21 @@ export default class Index extends Component {
     };
   }
 
-  resetState() {
+  resetState = () => {
     this.setState(this.initialState);
   }
 
-  downloadImage() {
+  fixSnSize = event => {
+    this.setState({height: 630})
+    this.setState({width: 1200})
+  }
+
+  handleChangeFacebook = event => {
+    this.setState({height: 630})
+    this.setState({width: 1200})
+  }
+
+  downloadImage = () => {
     const downloadLink = document.getElementById('downloadLink');
     const canvasToImage = document.getElementById('canvas-to-image');
     if(!downloadLink || !canvasToImage) { return this.setState({hasDownloadError: true }) };
@@ -69,7 +77,7 @@ export default class Index extends Component {
     this.setState({ [name]: value })
   }
 
-  handleChangeSquare(event) {
+  handleChangeSquare = event => {
     this.setState((prevState) => ({ isSquare: !prevState.isSquare }))
 
     if(!this.state.isSquare){
@@ -104,6 +112,10 @@ export default class Index extends Component {
     context.fillText(canvasText, this.state.width/2, this.state.height/2);
   }
 
+  handleColorChange = name => color => {
+    this.setState({ [name]: color.hex });
+  };
+
   render() {
     const canvasProps = {
       width: Number(this.state.width),
@@ -129,17 +141,20 @@ export default class Index extends Component {
       {key: 'png' ,value: 'png', text: '.png'},
       {key: 'jpeg', value: 'jpeg', text: 'jpeg'}
     ];
+    const colors =['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', '#0693E3', '#ABB8C3', '#EB144C', '#F78DA7', '#9900EF', '#FFFFFF', '#000000']
+    const imageWrap  = isMobile ? "mobileImageWrap" : "imageWrap"
     return (
       <>
         <Layout>
           <SEO
             title="サンプル画像を簡単に作れる"
           />
-          <div className="textCenter">
+          <div className={imageWrap}>
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
-          <div className="textCenter" style={{marginBottom: '1rem'}}>
-            <Button onClick={this.resetState}>初期化</Button>
+          <div className="textCenter margin-bottom-sm">
+            <Button onClick={this.resetState} basic className={ isMobile ? "fixSnsButton margin-bottom-xs" : null}>初期化</Button>
+            <Button onClick={this.fixSnSize} basic color='blue' className={ isMobile ? "fixSnsButton margin-bottom-xs" : null}>SNS(Twitter・Facebook)の画像サイズにする</Button>
             {isMobile ?
               <Message info>
                 <p>画像を長押しすると<br />画像の保存ができます。</p>
@@ -149,7 +164,7 @@ export default class Index extends Component {
           </div>
           {this.state.hasDownloadError &&
             <Message negative>
-              <Message.Header>ダウンロードに失敗しました🙇🏻‍♂️</Message.Header>
+              <Message.Header>ダウンロードに失敗しました<span>🙇🏻‍♂️</span></Message.Header>
             </Message>
           }
           <Form>
@@ -185,19 +200,19 @@ export default class Index extends Component {
               </Form.Field>
               <Form.Field>
                 <label>文字の色</label>
-                <input
-                  type="color"
-                  name="color"
-                  value={this.state.color}
-                  onChange={this.handleInputChange}
+                <TwitterPicker
+                  colors={colors}
+                  color={this.state.color}
+                  onChange={this.handleColorChange('color')}
                 />
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Input
                 label={`幅: ${this.state.width}px `}
-                min={1}
-                max={4999}
+                min={0}
+                max={5000}
+                step={5}
                 name='width'
                 onChange={this.handleInputChange}
                 type='range'
@@ -205,8 +220,9 @@ export default class Index extends Component {
               />
               <Form.Input
                 label={`高さ: ${this.state.height}px `}
-                min={1}
-                max={4999}
+                min={0}
+                max={5000}
+                step={5}
                 name='height'
                 onChange={this.handleInputChange}
                 type='range'
@@ -214,11 +230,10 @@ export default class Index extends Component {
               />
               <Form.Field>
                 <label>背景色</label>
-                <input
-                  type="color"
-                  name="backgroundColor"
-                  value={this.state.backgroundColor}
-                  onChange={this.handleInputChange}
+                <TwitterPicker
+                  colors={colors}
+                  color={this.state.backgroundColor}
+                  onChange={this.handleColorChange('backgroundColor')}
                 />
               </Form.Field>
             </Form.Group>
@@ -233,15 +248,6 @@ export default class Index extends Component {
                 value={this.state.borderWidth}
               />
               <Form.Field>
-                <label>枠線の色</label>
-                <input
-                  type="color"
-                  name="borderColor"
-                  value={this.state.borderColor}
-                  onChange={this.handleInputChange}
-                />
-              </Form.Field>
-              <Form.Field>
                 <Form.Select
                   name="fileType"
                   label='拡張子'
@@ -249,6 +255,14 @@ export default class Index extends Component {
                   defaultValue={this.state.fileType}
                   onChange={this.handleSelectChange}
                   options={selectableFileType}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>枠線の色</label>
+                <TwitterPicker
+                  colors={colors}
+                  color={this.state.borderColor}
+                  onChange={this.handleColorChange('borderColor')}
                 />
               </Form.Field>
             </Form.Group>
