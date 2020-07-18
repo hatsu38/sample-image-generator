@@ -142,11 +142,11 @@ export default class Index extends Component {
           <SEO
             title="サンプル画像を簡単に作れる"
           />
-          <div className="textCenter">
+          <div className="textCenter imageWrap">
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
           <div className="textCenter margin-bottom-sm">
-            <Button onClick={this.fixSnSize} className={ isMobile && "fixSnsButton margin-bottom-xs"}>SNS(Twitter・Facebook)の画像サイズにする</Button>
+            <Button onClick={this.fixSnSize} className={ isMobile ? "fixSnsButton margin-bottom-xs" : null}>SNS(Twitter・Facebook)の画像サイズにする</Button>
             <Button onClick={this.resetState}>初期化</Button>
             {isMobile ?
               <Message info>
@@ -157,7 +157,7 @@ export default class Index extends Component {
           </div>
           {this.state.hasDownloadError &&
             <Message negative>
-              <Message.Header>ダウンロードに失敗しました🙇🏻‍♂️</Message.Header>
+              <Message.Header>ダウンロードに失敗しました<span>🙇🏻‍♂️</span></Message.Header>
             </Message>
           }
           <Form>
@@ -202,6 +202,7 @@ export default class Index extends Component {
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
+              {/* <input type="range" name="width" min="0" max="5000" step="5" onChange={this.handleInputChange}> */}
               <Form.Input
                 label={`幅: ${this.state.width}px `}
                 min={0}

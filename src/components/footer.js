@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React, { Component } from 'react';
-import { CopyToClipboard, Copy } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { Icon } from 'semantic-ui-react'
 
@@ -8,7 +8,7 @@ export default class Footer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      copied: false,
+      copied: false
     }
   }
 
@@ -21,7 +21,7 @@ export default class Footer extends Component {
   }
 
   render() {
-    const shareURL = window.location.href.replace(window.location.search, "")
+    const shareURL = "https://sample-image-generator.web.app/"
     return (
       <>
         <div className='textCenter'>
