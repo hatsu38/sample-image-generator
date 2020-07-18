@@ -8,6 +8,7 @@ import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
 import { Button, Form, Message, Checkbox } from 'semantic-ui-react'
+import { TwitterPicker } from 'react-color';
 
 export default class Index extends Component {
   constructor(props) {
@@ -19,8 +20,8 @@ export default class Index extends Component {
     return {
       isSquare: false,
       text: '',
-      color: '#ffffff',
-      backgroundColor: '#cccccc',
+      color: '#FFFFFF',
+      backgroundColor: '#8ED1FC',
       xPosition: 0,
       yPosition: 0,
       width: 800,
@@ -111,6 +112,10 @@ export default class Index extends Component {
     context.fillText(canvasText, this.state.width/2, this.state.height/2);
   }
 
+  handleColorChange = name => color => {
+    this.setState({ [name]: color.hex });
+  };
+
   render() {
     const canvasProps = {
       width: Number(this.state.width),
@@ -136,13 +141,15 @@ export default class Index extends Component {
       {key: 'png' ,value: 'png', text: '.png'},
       {key: 'jpeg', value: 'jpeg', text: 'jpeg'}
     ];
+    const colors =['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', '#0693E3', '#ABB8C3', '#EB144C', '#F78DA7', '#9900EF', '#FFFFFF', '#000000']
+    const imageWrap  = isMobile ? "mobileImageWrap" : "imageWrap"
     return (
       <>
         <Layout>
           <SEO
             title="サンプル画像を簡単に作れる"
           />
-          <div className="textCenter imageWrap">
+          <div className={imageWrap}>
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
           <div className="textCenter margin-bottom-sm">
@@ -193,16 +200,14 @@ export default class Index extends Component {
               </Form.Field>
               <Form.Field>
                 <label>文字の色</label>
-                <input
-                  type="color"
-                  name="color"
-                  value={this.state.color}
-                  onChange={this.handleInputChange}
+                <TwitterPicker
+                  colors={colors}
+                  color={this.state.color}
+                  onChange={this.handleColorChange('color')}
                 />
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
-              {/* <input type="range" name="width" min="0" max="5000" step="5" onChange={this.handleInputChange}> */}
               <Form.Input
                 label={`幅: ${this.state.width}px `}
                 min={0}
@@ -225,11 +230,10 @@ export default class Index extends Component {
               />
               <Form.Field>
                 <label>背景色</label>
-                <input
-                  type="color"
-                  name="backgroundColor"
-                  value={this.state.backgroundColor}
-                  onChange={this.handleInputChange}
+                <TwitterPicker
+                  colors={colors}
+                  color={this.state.backgroundColor}
+                  onChange={this.handleColorChange('backgroundColor')}
                 />
               </Form.Field>
             </Form.Group>
@@ -244,15 +248,6 @@ export default class Index extends Component {
                 value={this.state.borderWidth}
               />
               <Form.Field>
-                <label>枠線の色</label>
-                <input
-                  type="color"
-                  name="borderColor"
-                  value={this.state.borderColor}
-                  onChange={this.handleInputChange}
-                />
-              </Form.Field>
-              <Form.Field>
                 <Form.Select
                   name="fileType"
                   label='拡張子'
@@ -260,6 +255,14 @@ export default class Index extends Component {
                   defaultValue={this.state.fileType}
                   onChange={this.handleSelectChange}
                   options={selectableFileType}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>枠線の色</label>
+                <TwitterPicker
+                  colors={colors}
+                  color={this.state.borderColor}
+                  onChange={this.handleColorChange('borderColor')}
                 />
               </Form.Field>
             </Form.Group>
