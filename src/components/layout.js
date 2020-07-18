@@ -4,8 +4,13 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import Footer from "./footer"
+
 import "./reset.css"
 import "./layout.css"
+import "./index.css"
+import "./form.css"
+
+import { Container } from 'semantic-ui-react'
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -21,14 +26,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
+        <Container>
+          <main>{children}</main>
+        </Container>
         <Footer siteTitle={data.site.siteMetadata.title} />
         <footer
           className="textCenter"
@@ -40,7 +40,6 @@ const Layout = ({ children }) => {
           {` `}
           <span>さんぷる画像ジェネレーター</span>
         </footer>
-      </div>
       <script src="/__/firebase/7.16.0/firebase-app.js"></script>
       <script src="/__/firebase/7.16.0/firebase-analytics.js"></script>
       <script src="/__/firebase/init.js"></script>

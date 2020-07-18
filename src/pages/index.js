@@ -4,6 +4,7 @@ import { isMobile } from "react-device-detect";
 import 'semantic-ui-css/semantic.min.css'
 
 import Layout from "../components/layout"
+import About from "../components/about"
 import SEO from "../components/seo"
 import CanvasImage from "../components/canvasImage"
 
@@ -24,7 +25,7 @@ export default class Index extends Component {
       backgroundColor: '#8ED1FC',
       xPosition: 0,
       yPosition: 0,
-      width: 800,
+      width: 1100,
       height: 400,
       fontSize: 60,
       textAlign: 'center',
@@ -149,6 +150,7 @@ export default class Index extends Component {
           <SEO
             title="サンプル画像を簡単に作れる"
           />
+          <About />
           <div className={imageWrap}>
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
