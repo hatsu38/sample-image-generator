@@ -154,8 +154,8 @@ export default class Index extends Component {
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
           <div className="textCenter margin-bottom-sm">
-            <Button onClick={this.resetState} basic className={ isMobile ? "fixSnsButton margin-bottom-xs" : null}>初期化</Button>
-            <Button onClick={this.fixSnSize} basic color='blue' className={ isMobile ? "fixSnsButton margin-bottom-xs" : null}>SNS(Twitter・Facebook)の画像サイズにする</Button>
+            <Button onClick={this.resetState} basic className="fixSnsButton margin-bottom-xs">初期化</Button>
+            <Button onClick={this.fixSnSize} basic color='blue' className="fixSnsButton margin-bottom-xs">SNS(Twitter・Facebook)の画像サイズにする</Button>
             {isMobile ?
               <Message info>
                 <p>画像を長押しすると<br />画像の保存ができます。</p>

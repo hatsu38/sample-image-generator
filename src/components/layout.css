@@ -629,7 +629,8 @@ pre tt:after {
   margin-bottom: 1rem !important;
 }
 
-.margin-bottom-xs{
-  margin-bottom: 0.5rem !important;
+@media only screen and (max-width: 760px) {
+  .margin-bottom-xs{
+    margin-bottom: 0.5rem !important;
+  }
 }
-
