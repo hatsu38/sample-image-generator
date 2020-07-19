@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { isMobile } from "react-device-detect";
 
 import "./canvasimage.css"
 
@@ -42,7 +41,6 @@ export default class CanvasImage extends Component {
   }
 
   render() {
-    const imageClassName = isMobile ? 'mobileImageFrame' : 'pcImageFrame'
     return (
       <>
         <canvas
@@ -53,7 +51,7 @@ export default class CanvasImage extends Component {
           style={{display: 'none'}}
         />
         <div className="maxWidthHightImage">
-          <img id="canvas-to-image" className={imageClassName} src={this.state.imageFileName} alt="" />
+          <img id="canvas-to-image" className="imageFrame" src={this.state.imageFileName} alt="" />
         </div>
       </>
     );
