@@ -143,7 +143,6 @@ export default class Index extends Component {
       {key: 'jpeg', value: 'jpeg', text: 'jpeg'}
     ];
     const colors =['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', '#0693E3', '#ABB8C3', '#EB144C', '#F78DA7', '#9900EF', '#FFFFFF', '#000000']
-    const imageWrap  = isMobile ? "mobileImageWrap" : "imageWrap"
     return (
       <>
         <Layout>
@@ -151,12 +150,12 @@ export default class Index extends Component {
             title="サンプル画像を簡単に作れる"
           />
           <About />
-          <div className={imageWrap}>
+          <div className="imageWrap">
             <CanvasImage {...canvasProps} ref={this.canvas} />
           </div>
           <div className="textCenter margin-bottom-sm">
-            <Button onClick={this.resetState} basic className={ isMobile ? "fixSnsButton margin-bottom-xs" : null}>初期化</Button>
-            <Button onClick={this.fixSnSize} basic color='blue' className={ isMobile ? "fixSnsButton margin-bottom-xs" : null}>SNS(Twitter・Facebook)の画像サイズにする</Button>
+            <Button onClick={this.resetState} basic className="fixSnsButton margin-bottom-xs">初期化</Button>
+            <Button onClick={this.fixSnSize} basic color='blue' className="fixSnsButton margin-bottom-xs">SNS(Twitter・Facebook)の画像サイズにする</Button>
             {isMobile ?
               <Message info>
                 <p>画像を長押しすると<br />画像の保存ができます。</p>
