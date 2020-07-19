@@ -6,7 +6,7 @@ Web上から簡単にサンプル画像を作ることが出来るサービス�
 This is a service that allows you to easily create a sample image from the web.
 Please try it out here.
 
-WebSite：https://sample-image-generator.web.app/
+WebSite：https://sample-image-generator.hatsu38.com/
 
 ![Demo](https://raw.githubusercontent.com/wiki/hatsu38/sample-image-generator/image/sample-image-getenator.gif)
 
@@ -26,6 +26,6 @@ WebSite：https://sample-image-generator.web.app/
 1. firebase login
 2. gatsby build
 3. firebase deploy
-4. Access https://sample-image-generator.web.app/
+4. Access https://sample-image-generator.hatsu38.com/
 
 Use npm

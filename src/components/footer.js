@@ -21,7 +21,7 @@ export default class Footer extends Component {
   }
 
   render() {
-    const shareURL = "https://sample-image-generator.web.app/"
+    const shareURL = "https://sample-image-generator.hatsu38.com/"
     return (
       <>
         <div className='textCenter'>

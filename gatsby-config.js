@@ -5,7 +5,7 @@ module.exports = {
     title: `さんぷる画像ジェネレーター`,
     description: `アプリいらずで、サンプル画像を簡単に作れるサイトです。色や大きさ、中の文字などを自由に編集することができます。簡易的なオリジナル画像を作る際にご利用ください！`,
     author: `@hatsu_38`,
-    siteUrl: 'https://sample-image-generator.web.app/'
+    siteUrl: 'https://sample-image-generator.hatsu38.com/'
   },
   plugins: [
     {

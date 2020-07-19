@@ -57,7 +57,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:image`,
-          content: 'https://sample-image-generator.web.app/images/ogp.png',
+          content: 'https://sample-image-generator.hatsu38.com/images/ogp.png',
         },
         {
           name: `twitter:card`,
