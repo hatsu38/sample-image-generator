@@ -27,3 +27,5 @@ WebSite：https://sample-image-generator.web.app/
 2. gatsby build
 3. firebase deploy
 4. Access https://sample-image-generator.web.app/
+
+Use npm
